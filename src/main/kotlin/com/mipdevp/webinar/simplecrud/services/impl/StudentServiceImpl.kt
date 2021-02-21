@@ -32,6 +32,7 @@ class StudentServiceImpl(
             npm = updateStudent.npm
             email = updateStudent.email
         }
+        studentRepository.save(student)
         return convertStudentResponse(student)
     }
     override fun delete(id: String) {
@@ -57,7 +58,7 @@ class StudentServiceImpl(
     }
 
     private fun findStudentById(id: String): Student {
-        val student = studentRepository.getOne(id)
+        val student = studentRepository.findByIdOrNull(id)
         if(student == null) {
             throw Exception()
         } else {
